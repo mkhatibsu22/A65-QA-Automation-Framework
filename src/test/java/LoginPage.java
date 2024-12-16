@@ -1,15 +1,33 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+public class LoginPage extends BasePage {
 
-public class LoginTests extends BaseTest {
-    @Test
+    public LoginPage(WebDriver givenDriver) {
+        super(givenDriver);
+    }
+
+    @FindBy (css="[type='email']")
+    private WebElement emailField;
+
+    @FindBy (css="[type='password']")
+    private WebElement passwordField;
+
+    @FindBy (css="[type='submit']")
+    private WebElement submitbtnField;
+
+    public  void login(String email,String password)
+    {
+        emailField.sendKeys(email);
+        passwordField.sendKeys(password);
+        submitbtnField.click();
+
+    }
+   /* @Test
     public void loginEmptyEmailPassword()  {
 
         WebElement loginField = driver.findElement(By.cssSelector("[type='email']"));
@@ -19,5 +37,5 @@ public class LoginTests extends BaseTest {
         passwordField.sendKeys("6JooL8gp");
         submitButton.click();
         Assert.assertEquals(driver.getCurrentUrl(),"https://qa.koel.app/");
-    }
+    }*/
 }
