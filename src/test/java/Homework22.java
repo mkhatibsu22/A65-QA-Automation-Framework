@@ -10,6 +10,6 @@ public class Homework22
     public void hw22()
 {
     loginPage.login("mohamed.khatib@testpro.io", "ZWyxkAKX");
-    homePage.renamePlaylist("whatsapp");
+    homePage.renamePlaylist();
 }
 }

@@ -46,6 +46,12 @@ public  class BasePage {
         action.doubleClick(findElement(locator)).perform();
     }
 
+    public String generateRandomPlaylistName(){
+        Faker faker = new Faker(new Locale("en-US"));
+        String newName = faker.address().country();
+        return newName;
+    }
+
     @BeforeTest
   public void driverSetup() {
         //      Added ChromeOptions argument below to fix websocket error
@@ -106,11 +112,7 @@ public  class BasePage {
         return newName;
     }
 
-    public String generateRandomPlaylistName(){
-        Faker faker = new Faker(new Locale("en-US"));
-        String newName = faker.address().country();
-        return newName;
-    }
+
 
     public void enterPassword(String password) {
         WebElement passwordInput = waitUntilClickable(By.cssSelector("[type='password']"));
