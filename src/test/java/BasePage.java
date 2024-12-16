@@ -6,21 +6,74 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 
-public class BaseTest {
+public  class BasePage {
 
-    protected WebDriver driver;
-    WebDriverWait wait;
+   static WebDriver driver;
+   static   WebDriverWait wait;
+   static Actions action;
+    ChromeOptions options = new ChromeOptions();
 
+  /*  @BeforeSuite
+    static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+
+    }
+*/
+  public WebElement findElement(By locator)
+  {
+      return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+  }
+
+    public void click(By locator)
+    {
+        wait.until((ExpectedConditions.visibilityOfElementLocated(locator))).click();
+    }
+
+    public void doubleClick(By locator)
+    {
+        action.doubleClick(findElement(locator)).perform();
+    }
+
+    @BeforeTest
+  public void driverSetup() {
+        //      Added ChromeOptions argument below to fix websocket error
+
+        WebDriverManager.chromedriver().setup();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
+        // options.addArguments("--start-maximized");
+        driver = new ChromeDriver(options);
+        System.out.println("here212");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        String url = "https://qa.koel.app/";
+        driver.get(url);
+       // wait=new WebDriverWait(driver,Duration.ofSeconds(5));
+        action= new Actions(driver);
+
+    }
+    /*
+    public BasePage(WebDriver givenDriver)
+
+    {
+        driver=givenDriver;
+        wait=new WebDriverWait(driver,Duration.ofSeconds(5));
+        action= new Actions(driver);
+    }*/
+
+    /*
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -151,5 +204,5 @@ public class BaseTest {
 
     protected void clickFirstPlaylist() {
         driver.findElement(By.cssSelector(".playlist.playlist:nth-of-type(3)")).click();
-    }
+    }*/
 }
