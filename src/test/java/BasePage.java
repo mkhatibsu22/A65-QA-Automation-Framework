@@ -19,7 +19,7 @@ public  class BasePage {
     protected    WebDriver driver;
     protected     WebDriverWait wait;
     protected     Actions action;
-    ChromeOptions options = new ChromeOptions();
+
 
     /*  @BeforeSuite
       static void setupClass() {
@@ -32,6 +32,7 @@ public  class BasePage {
         driver=givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         PageFactory.initElements(driver,this);
+        action= new Actions(driver);
     }
     protected WebElement findElement(WebElement webElement)
 
