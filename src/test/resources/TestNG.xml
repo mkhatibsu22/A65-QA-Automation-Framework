@@ -8,7 +8,7 @@
             <class name="LoginPage"/>
             <class name="BasePage"/>
             <class name="HomePage"/>
-            <class name="Homework23"/>
+            <class name="Homework24"/>
         </classes>
     </test>
 </suite>
