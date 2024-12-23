@@ -12,7 +12,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,30 +22,59 @@ public class BaseTest {
 
     protected WebDriver driver;
     WebDriverWait wait;
-
-    @BeforeSuite
+    private static final ThreadLocal<WebDriver> threadDriver= new ThreadLocal<>();
+    String url;
+    //@BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod
-    public void setUpDriver() {
+    @Parameters({"BaseURL"})
+    public void setUpDriver(String BaseURL) throws MalformedURLException {
         //      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
+       /* ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        driver = new ChromeDriver(options);*/
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+       /* wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         String url = "https://qa.koel.app/";
-        driver.get(url);
+
+        driver.get(url);*/
+        getThreadDriver().get(BaseURL);
+        url=BaseURL;
+        navigateToPage();
     }
 
+    private WebDriver getThreadDriver() {
+        return threadDriver().get();
+    }
+
+    private WebDriver pickBrowser(String browser) {
+    }
+
+    void lambdaTest()
+    {
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("131");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "mkhatibsu22");
+        ltOptions.put("accessKey", "OUzjDicFstAqZq1NCnNCQYzTkmbHVLpQA0l9z5drlad7ZROmYa");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+    }
 
     @AfterMethod
     public void closeBrowser() {
-        driver.quit();
+        threadDriver.get().close();
+        threadDriver.remove();
     }
 
 
