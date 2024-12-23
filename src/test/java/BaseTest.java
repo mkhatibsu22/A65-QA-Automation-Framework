@@ -6,15 +6,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,15 +58,55 @@ public class BaseTest {
         navigateToPage();
     }
 
+    private void navigateToPage() {
+        getThreadDriver().get(url);
+    }
+
     private WebDriver getThreadDriver() {
-        return threadDriver().get();
+        return threadDriver.get();
     }
 
-    private WebDriver pickBrowser(String browser) {
-    }
 
-    void lambdaTest()
+    public WebDriver pickBrowser(String browser) throws MalformedURLException
     {
+        DesiredCapabilities caps =new DesiredCapabilities();
+        String gridURL="http://192.168.56.1:4444";
+
+        switch (browser){
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                return driver=new FirefoxDriver();
+            case "MicrosoftEdge":
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions edgeOptions=new EdgeOptions();
+                edgeOptions.addArguments("--remote-allow-origins=*");
+                return driver=new EdgeDriver(edgeOptions);
+            case "grid-Edge":
+                caps.setCapability("browserName","MicrosoftEdge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+
+            case "grid-firefox":
+                caps.setCapability("browserName","firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+
+            case "grid-chrome":
+                caps.setCapability("browserName","chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+
+                case "cloud";
+                return lambdaTest();
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions =new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                return driver=new ChromeDriver(chromeOptions);
+
+        }}
+
+    public WebDriver lambdaTest() throws MalformedURLException
+    {
+        DesiredCapabilities caps =new DesiredCapabilities();
+        String hubURL="HTTPS://hub.lambdatest.com/wd/hub/";
 
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 10");
@@ -69,6 +118,7 @@ public class BaseTest {
         ltOptions.put("selenium_version", "4.0.0");
         ltOptions.put("w3c", true);
         browserOptions.setCapability("LT:Options", ltOptions);
+        return new RemoteWebDriver(new URL(hubURL),caps);
     }
 
     @AfterMethod
