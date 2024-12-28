@@ -7,7 +7,10 @@
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
-            <class name="cucumberRunner"/>
+            <class name="MyStepdefs"/>
+            <class name="Homework27"/>
+
+
         </classes>
     </test>
 </suite>
