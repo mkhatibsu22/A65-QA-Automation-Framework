@@ -32,12 +32,12 @@ public class MyStepdefs {
 
     @And("I enter registered email")
     public void iEnterRegisteredEmail(String email) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='mohamed.khatib@testpro.io']"))).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type=email]"))).sendKeys(email);
     }
 
     @And("I enter valid password")
     public void iEnterValidPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='ZWyxkAKX']"))).sendKeys(password);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type=password]"))).sendKeys(password);
     }
 
     @When("I click submit button")
