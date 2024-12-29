@@ -9,7 +9,7 @@
             <class name="BaseTest"/>
             <class name="MyStepdefs"/>
             <class name="Homework27"/>
-
+            <class name="CucumberRunner"/>
 
         </classes>
     </test>
