@@ -30,23 +30,23 @@ public class MyStepdefs {
         driver.get(url);
     }
 
-    @And("I enter registered email")
+    @And("I enter registered email {string}")
     public void iEnterRegisteredEmail(String email) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type=email]"))).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']"))).sendKeys(email);
     }
 
-    @And("I enter valid password")
+    @And("I enter valid password {string}")
     public void iEnterValidPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type=password]"))).sendKeys(password);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']"))).sendKeys(password);
     }
 
     @When("I click submit button")
     public void iClickSubmitButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type=submit]"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='submit']"))).click();
     }
 
     @Then("I must be logged in successfully")
     public void iMustBeLoggedInSuccessfully() {
-        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img=avatar"))).isDisplayed());
+        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed());
     }
 }
