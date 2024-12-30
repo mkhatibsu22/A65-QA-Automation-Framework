@@ -5,6 +5,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class LoginPage extends BasePage {
     /*@Test
     public void loginEmptyEmailPassword()  {
@@ -25,6 +27,8 @@ public class LoginPage extends BasePage {
     By emailField=By.cssSelector("input[type='email']");
     By passwordField=By.cssSelector("input[type='password']");
     By submitBtn =By.cssSelector("button[type='submit']");
+    By logoutBtn =By.cssSelector("a.logout.control");
+
 
      void login(String email,String password)
     {
@@ -32,6 +36,10 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField)).sendKeys(password);
         wait.until(ExpectedConditions.visibilityOfElementLocated(submitBtn)).click();
 
+    }
+    void logout()
+    {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(logoutBtn)).click();
     }
 
 }

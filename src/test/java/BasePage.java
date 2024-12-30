@@ -9,10 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 import java.util.List;
@@ -20,40 +17,37 @@ import java.util.Locale;
 
 public  class BasePage {
 
-   static WebDriver driver;
-   static   WebDriverWait wait;
-   static Actions action;
+    static WebDriver driver;
+    static WebDriverWait wait;
+    static Actions action;
     ChromeOptions options = new ChromeOptions();
 
-  /*  @BeforeSuite
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+    /*  @BeforeSuite
+      static void setupClass() {
+          WebDriverManager.chromedriver().setup();
 
+      }
+  */
+    public WebElement findElement(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-*/
-  public WebElement findElement(By locator)
-  {
-      return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-  }
 
-    public void click(By locator)
-    {
+    public void click(By locator) {
         wait.until((ExpectedConditions.visibilityOfElementLocated(locator))).click();
     }
 
-    public void doubleClick(By locator)
-    {
+    public void doubleClick(By locator) {
         action.doubleClick(findElement(locator)).perform();
     }
 
-    public String generateRandomPlaylistName(){
+    public String generateRandomPlaylistName() {
         Faker faker = new Faker(new Locale("en-US"));
         String newName = faker.address().country();
         return newName;
     }
 
     @BeforeTest
-  public void driverSetup() {
+    public void driverSetup() {
         //      Added ChromeOptions argument below to fix websocket error
 
         WebDriverManager.chromedriver().setup();
@@ -66,10 +60,20 @@ public  class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         String url = "https://qa.koel.app/";
         driver.get(url);
-       // wait=new WebDriverWait(driver,Duration.ofSeconds(5));
-        action= new Actions(driver);
+        // wait=new WebDriverWait(driver,Duration.ofSeconds(5));
+        action = new Actions(driver);
 
     }
+
+    @DataProvider(name = "IncorrectLoginProviders")
+    public static Object[][] getDataFromDataProviders() {
+        return new Object[][]{
+                {"notExisting@email.com", "NotExistingPassword"},
+                {"demo@class.com", ""},
+                {"", ""},
+        };
+    }
+}
     /*
     public BasePage(WebDriver givenDriver)
 
@@ -207,4 +211,3 @@ public  class BasePage {
     protected void clickFirstPlaylist() {
         driver.findElement(By.cssSelector(".playlist.playlist:nth-of-type(3)")).click();
     }*/
-}
