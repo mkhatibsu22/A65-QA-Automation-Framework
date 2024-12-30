@@ -65,15 +65,9 @@ public  class BasePage {
 
     }
 
-    @DataProvider(name = "IncorrectLoginProviders")
-    public static Object[][] getDataFromDataProviders() {
-        return new Object[][]{
-                {"notExisting@email.com", "NotExistingPassword"},
-                {"demo@class.com", ""},
-                {"", ""},
-        };
+
     }
-}
+
     /*
     public BasePage(WebDriver givenDriver)
 
