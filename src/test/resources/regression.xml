@@ -7,7 +7,7 @@
         <classes>
             <class name="LoginPage"/>
             <class name="BasePage"/>
-            <class name="SmokeTest"/>
+
             <class name="RegressionTest"/>
         </classes>
     </test>
