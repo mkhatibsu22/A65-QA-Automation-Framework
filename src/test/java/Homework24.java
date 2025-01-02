@@ -22,21 +22,20 @@ public class Homework24 {
     ChromeOptions options = new ChromeOptions();
     WebDriver driver;
     @Test
-            void main()
-    {
-        WebDriverManager.chromedriver().setup();
+            void main() throws MalformedURLException {
+       /* WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
-        // options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
+        // options.addArguments("--start-maximized");*/
+        driver = pickBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        LoginPage loginPage1=new LoginPage(driver);
-        HomePage homePage1=new HomePage(driver);
+        loginPage=new LoginPage(driver);
+        homePage=new HomePage(driver);
         String url = "https://qa.koel.app/";
         driver.get(url);
              System.out.println("here212");
-        loginPage1.login("mohamed.khatib@testpro.io", "ZWyxkAKX");
-        homePage1.renamePlaylist();
+        loginPage.login("mohamed.khatib@testpro.io", "ZWyxkAKX");
+        homePage.renamePlaylist();
     }
 
     public WebDriver pickBrowser(String browser) throws MalformedURLException

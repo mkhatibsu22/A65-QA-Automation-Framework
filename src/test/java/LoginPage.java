@@ -19,7 +19,7 @@ public class LoginPage extends BasePage {
 
     @FindBy (css="[type='submit']")
     private WebElement submitbtnField;
-
+@Test
     public  void login(String email,String password)
     {
         emailField.sendKeys(email);
