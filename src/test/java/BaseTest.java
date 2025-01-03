@@ -53,16 +53,17 @@ public class BaseTest {
         String url = "https://qa.koel.app/";
 
         driver.get(url);*/
-        getThreadDriver().get(BaseURL);
+        //getThreadDriver().get(BaseURL);
         url=BaseURL;
-        navigateToPage();
+        threadDriver.get().get(url);
+        //navigateToPage();
     }
 
     private void navigateToPage() {
         getThreadDriver().get(url);
     }
 
-    private WebDriver getThreadDriver() {
+    public WebDriver getThreadDriver() {
         return threadDriver.get();
     }
 
@@ -93,7 +94,7 @@ public class BaseTest {
                 caps.setCapability("browserName","chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
 
-                case "cloud";
+                case "cloud":
                 return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();

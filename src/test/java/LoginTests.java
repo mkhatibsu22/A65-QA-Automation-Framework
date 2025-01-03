@@ -11,7 +11,7 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
     @Test
     public void loginEmptyEmailPassword()  {
-
+        driver=getThreadDriver();
         WebElement loginField = driver.findElement(By.cssSelector("[type='email']"));
         loginField.sendKeys("planner@testpro.io");
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
