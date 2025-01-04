@@ -13,10 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -40,7 +37,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void setUpDriver(String BaseURL) throws MalformedURLException {
+    public void setUpDriver(@Optional String BaseURL) throws MalformedURLException {
         //      Added ChromeOptions argument below to fix websocket error
        /* ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -56,6 +53,7 @@ public class BaseTest {
         //getThreadDriver().get(BaseURL);
         url=BaseURL;
         threadDriver.get().get(url);
+        driver=getThreadDriver();
         //navigateToPage();
     }
 
@@ -108,24 +106,40 @@ public class BaseTest {
     {
         DesiredCapabilities caps =new DesiredCapabilities();
         String hubURL="HTTPS://hub.lambdatest.com/wd/hub/";
-
-        ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setPlatformName("Windows 10");
-        browserOptions.setBrowserVersion("131");
+        //String authkey="OUzjDicFstAqZq1NCnNCQYzTkmbHVLpQA0l9z5drlad7ZROmYa";
+        //String username="mkhatibsu22";
+        caps.setCapability("browserName","chrome");
+        caps.setCapability("browserVersion","119");
+        //ChromeOptions browserOptions = new ChromeOptions();
+        //browserOptions.setPlatformName("Windows 10");
+       // browserOptions.setBrowserVersion("131");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
         ltOptions.put("username", "mkhatibsu22");
         ltOptions.put("accessKey", "OUzjDicFstAqZq1NCnNCQYzTkmbHVLpQA0l9z5drlad7ZROmYa");
+        ltOptions.put("build","Selenium 4");
+        ltOptions.put("name",this.getClass().getName());
         ltOptions.put("project", "Untitled");
         ltOptions.put("selenium_version", "4.0.0");
         ltOptions.put("w3c", true);
-        browserOptions.setCapability("LT:Options", ltOptions);
-        return new RemoteWebDriver(new URL(hubURL),caps);
+        ltOptions.put("seCdp", true);
+        ltOptions.put("PlatformName","Windows 10");
+       // browserOptions.setCapability("LT:Options", ltOptions);
+        caps.setCapability("LT:Options", ltOptions);
+        return new RemoteWebDriver(new URL(hubURL),caps);/*
+        caps.setCapability("platform","Windows 10");
+        caps.setCapability("browserName","chrome");
+        caps.setCapability("version","110.0");
+        caps.setCapability("resolution","1024x768");
+        caps.setCapability("build","TestNG With Java");
+        caps.setCapability("name",this.getClass().getName());
+        caps.setCapability("plugin","git-testng");
+        return new RemoteWebDriver(new URL("https://"+username+":"+authkey+hubURL),caps);*/
     }
 
     @AfterMethod
     public void closeBrowser() {
-        threadDriver.get().close();
-        threadDriver.remove();
+       // threadDriver.get().close();
+        //threadDriver.remove();
     }
 
 
