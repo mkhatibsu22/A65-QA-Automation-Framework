@@ -54,21 +54,19 @@ public  class BasePage {
     }
 
     @BeforeTest
-    public void driverSetup() {
+    public void driverSetup() throws MalformedURLException {
         //      Added ChromeOptions argument below to fix websocket error
 
-        WebDriverManager.chromedriver().setup();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-notifications");
-        // options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
-        System.out.println("here212");
+        driver = pickBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         String url = "https://qa.koel.app/";
         driver.get(url);
+        System.out.println("here212");
+
+
         // wait=new WebDriverWait(driver,Duration.ofSeconds(5));
-        action = new Actions(driver);
+       // action = new Actions(driver);
 
     }
     public WebDriver pickBrowser(String browser) throws MalformedURLException
@@ -104,7 +102,7 @@ public  class BasePage {
                 return driver=new ChromeDriver(chromeOptions);
 
         }
-    }
+    }}/*
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void lunchBrowser(String BaseURL) throws MalformedURLException
