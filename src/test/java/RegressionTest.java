@@ -11,7 +11,7 @@ public class RegressionTest {
     {
         loginPage.login("mohamed.khatib@testpro.io", "ZWyxkAKX");
 
-        loginPage.logout();
+
     }
 
     @DataProvider(name = "IncorrectLoginProviders")

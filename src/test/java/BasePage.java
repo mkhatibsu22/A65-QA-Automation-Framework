@@ -102,7 +102,12 @@ public  class BasePage {
                 return driver=new ChromeDriver(chromeOptions);
 
         }
-    }}/*
+    }
+    @AfterMethod
+    public void closeBrowser() {
+        driver.quit();
+    }
+}/*
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void lunchBrowser(String BaseURL) throws MalformedURLException

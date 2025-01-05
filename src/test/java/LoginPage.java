@@ -32,7 +32,9 @@ public class LoginPage extends BasePage {
 
      void login(String email,String password)
     {
-       wait.until(ExpectedConditions.visibilityOfElementLocated(emailField)).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailField)).clear();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailField)).clear();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailField)).sendKeys(email);
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField)).sendKeys(password);
         wait.until(ExpectedConditions.visibilityOfElementLocated(submitBtn)).click();
 
