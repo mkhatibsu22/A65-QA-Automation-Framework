@@ -18,9 +18,10 @@ public class AlbumsTest {
         // options.addArguments("--start-maximized");
         WebDriver driver;
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
         String url = "https://qa.koel.app/";
         driver.get(url);
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         System.out.println("here212");
        login("mohamed.khatib@testpro.io", "ZWyxkAKX");
         driver.get("https://qa.koel.app/#!/albums");
