@@ -23,14 +23,14 @@ public class AlbumsTest {
         // options.addArguments("--start-maximized");
 
         driver = new ChromeDriver(options);
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String url = "https://qa.koel.app/";
         driver.get(url);
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
         System.out.println("here212");
-    WebElement emailField=driver.findElement(By.cssSelector("input[type='email']"));
-    WebElement passwordField=driver.findElement(By.cssSelector("input[type='password']"));
-    WebElement submitbtnField=driver.findElement(By.cssSelector("[type='submit']"));
+        emailField=driver.findElement(By.cssSelector("input[type='email']"));
+        passwordField=driver.findElement(By.cssSelector("input[type='password']"));
+        submitbtnField=driver.findElement(By.cssSelector("button[type='submit']"));
        login("mohamed.khatib@testpro.io", "ZWyxkAKX");
         driver.get("https://qa.koel.app/#!/albums");
 
