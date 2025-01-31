@@ -55,12 +55,12 @@ public class SmartPlaylist {
      formInputNameValue= driver.findElement(By.cssSelector("input[name='value[]']"));
      formAddRule= driver.findElement(By.cssSelector("button[class='btn-add-rule']"));
      formAddGroup= driver.findElement(By.cssSelector("button[class='btn-add-group']"));
-     formSave1= driver.findElement(By.cssSelector("#extra button[type='submit']"));
+     formSave1= driver.findElement(By.cssSelector("div.smart-playlist-form button[type='submit']"));
 
     formPlaylistName.sendKeys("first smart playlist");
     formModelSelect.sendKeys("Title");
-formInputNameValue.sendKeys("hello");
-formSave1.click();
+    formInputNameValue.sendKeys("hello");
+     formSave1.click();
     }
 
 
