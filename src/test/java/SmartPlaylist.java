@@ -7,11 +7,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
-public class SmartPlaylist extends BaseTest {
+public class SmartPlaylist   {
    // WebDriver driver;
 
     WebElement passwordField;
@@ -26,9 +28,33 @@ public class SmartPlaylist extends BaseTest {
     WebElement formSave1;
 
 
-public SmartPlaylist( WebDriver givenDriver)
-{super(givenDriver) ;}
+    public  WebDriver driver ;
 
+    public  String url = "https://qa.koel.app/";
+    public  WebDriverWait wait = null;
+
+
+
+    public SmartPlaylist()  {
+        WebDriver.cdriver.setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
+//        options.addArguments("--start-maximized");
+
+        driver = new ChromeDriver(options);
+        //driver = pickBrowser(System.getProperty("browser"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        driver.get(url);
+        driver.findElement(By.cssSelector("input[type='email']")).sendKeys("mohamed.khatib@testpro.io");
+        driver.findElement(By.cssSelector("input[type='password']")).sendKeys("ZWyxkAKX");
+        WebElement element = driver.findElement(By.cssSelector("button[type='submit']"));
+        element.click();
+
+
+    }
 
      void createSmartPlaylistOnerule(String name,String model ,String opertaor,String eqValue) throws InterruptedException {
 

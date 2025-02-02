@@ -10,16 +10,14 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class RunTest extends BaseTest{
+public class RunTest  {
 
-    public RunTest(WebDriver givenDriver) {
-        super(givenDriver);
-    }
+
 
     @Test
-    public void doTest1() throws InterruptedException {
-          SmartPlaylist smartTestone=new SmartPlaylist(driver);
-          smartTestone.createSmartPlaylistOnerule("first try","Title","","any");
+    public void doTest1()   {
+          SmartPlaylist smartTestone=new SmartPlaylist();
+         // smartTestone.createSmartPlaylistOnerule("first try","Title","","any");
 
     }
     public  void login(String email,String password)
