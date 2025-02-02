@@ -16,7 +16,7 @@ public class SmartPlaylist extends BaseTest {
 
     WebElement passwordField;
     WebElement submitbtnField;
-    WebDriverWait wait;
+    //WebDriverWait wait;
     WebElement formPlaylistName;
     WebElement formModelSelect;
     WebElement formOperatorSelect;
@@ -24,15 +24,14 @@ public class SmartPlaylist extends BaseTest {
     WebElement formAddRule;
     WebElement formAddGroup;
     WebElement formSave1;
-    @FindBy(css="input[type='email']")
-    public WebElement emailField;
-
-    public SmartPlaylist(WebDriver givenDriver) {
-        super(givenDriver);
-    }
 
 
-     void given() throws InterruptedException {
+public SmartPlaylist( WebDriver givenDriver)
+{super(givenDriver) ;}
+
+
+     void createSmartPlaylistOnerule(String name,String model ,String opertaor,String eqValue) throws InterruptedException {
+
          WebElement plusCircleCP = driver.findElement(By.cssSelector("#playlists .fa.fa-plus-circle.create"));
          wait.until((ExpectedConditions.elementToBeClickable(plusCircleCP))).click();
          WebElement createSmartPlaylist = driver.findElement(By.cssSelector("[data-testid='playlist-context-menu-create-smart']"));
@@ -46,9 +45,9 @@ public class SmartPlaylist extends BaseTest {
          formAddGroup = driver.findElement(By.cssSelector("button[class='btn-add-group']"));
          formSave1 = driver.findElement(By.cssSelector("div.smart-playlist-form button[type='submit']"));
 
-         formPlaylistName.sendKeys("first smart playlist");
-         formModelSelect.sendKeys("Title");
-         formInputNameValue.sendKeys("hello");
+         formPlaylistName.sendKeys(name);
+         formModelSelect.sendKeys(model);
+         formInputNameValue.sendKeys(eqValue);
          formSave1.click();
      }
          //  @Test
