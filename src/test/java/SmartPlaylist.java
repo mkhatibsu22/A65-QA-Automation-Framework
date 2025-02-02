@@ -36,7 +36,7 @@ public class SmartPlaylist   {
 
 
     public SmartPlaylist()  {
-        WebDriver.cdriver.setup();
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
@@ -55,13 +55,16 @@ public class SmartPlaylist   {
 
 
     }
+    void openCreateSmartPlaylistForm() throws InterruptedException {
+        Thread.sleep(3000);
+        WebElement plusCircleCP = driver.findElement(By.cssSelector("#playlists .fa.fa-plus-circle.create"));
+        wait.until((ExpectedConditions.elementToBeClickable(plusCircleCP))).click();
+        WebElement createSmartPlaylist = driver.findElement(By.cssSelector("[data-testid='playlist-context-menu-create-smart']"));
+        wait.until((ExpectedConditions.elementToBeClickable(createSmartPlaylist))).click();
+    }
 
-     void createSmartPlaylistOnerule(String name,String model ,String opertaor,String eqValue) throws InterruptedException {
-
-         WebElement plusCircleCP = driver.findElement(By.cssSelector("#playlists .fa.fa-plus-circle.create"));
-         wait.until((ExpectedConditions.elementToBeClickable(plusCircleCP))).click();
-         WebElement createSmartPlaylist = driver.findElement(By.cssSelector("[data-testid='playlist-context-menu-create-smart']"));
-         wait.until((ExpectedConditions.elementToBeClickable(createSmartPlaylist))).click();
+     void addOnerule(String name,String model ,String opertaor,String eqValue ) throws InterruptedException {
+openCreateSmartPlaylistForm();
          Thread.sleep(2000);
          formPlaylistName = driver.findElement(By.cssSelector("input[name='name'][type='text']"));
          formModelSelect = driver.findElement(By.cssSelector("select[name='model[]']"));
@@ -74,10 +77,18 @@ public class SmartPlaylist   {
          formPlaylistName.sendKeys(name);
          formModelSelect.sendKeys(model);
          formInputNameValue.sendKeys(eqValue);
+
+         formAddRule.click();
+
+         formOperatorSelect = driver.findElement(By.cssSelector("select[name='operator[]']"));
+         formInputNameValue = driver.findElement(By.cssSelector("input[name='value[]']"));
+
+         formModelSelect.sendKeys("Album");
+         formInputNameValue.sendKeys("equal");
          formSave1.click();
      }
-         //  @Test
-         void createSmartPlaylistOneRule ()
+         //  @Test    div.rule-group input[name='value[]']
+         void createSmartPlaylistMultibleRule ()
          {
              formPlaylistName.sendKeys("first smart playlist");
              //formModelSelect.sendKeys("title");

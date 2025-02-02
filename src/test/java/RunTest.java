@@ -15,9 +15,9 @@ public class RunTest  {
 
 
     @Test
-    public void doTest1()   {
+    public void doTest1() throws InterruptedException {
           SmartPlaylist smartTestone=new SmartPlaylist();
-         // smartTestone.createSmartPlaylistOnerule("first try","Title","","any");
+          smartTestone.addOnerule("first try","Title","","any");
 
     }
     public  void login(String email,String password)
