@@ -44,7 +44,7 @@ public class SmartPlaylist   {
 
         driver = new ChromeDriver(options);
         //driver = pickBrowser(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         driver.get(url);
@@ -64,7 +64,7 @@ public class SmartPlaylist   {
     }
 
      void addOnerule(String name,String model ,String opertaor,String eqValue ) throws InterruptedException {
-openCreateSmartPlaylistForm();
+         openCreateSmartPlaylistForm();
          Thread.sleep(2000);
          formPlaylistName = driver.findElement(By.cssSelector("input[name='name'][type='text']"));
          formModelSelect = driver.findElement(By.cssSelector("select[name='model[]']"));
@@ -78,20 +78,36 @@ openCreateSmartPlaylistForm();
          formModelSelect.sendKeys(model);
          formInputNameValue.sendKeys(eqValue);
 
-         formAddRule.click();
 
-         formOperatorSelect = driver.findElement(By.cssSelector("select[name='operator[]']"));
-         formInputNameValue = driver.findElement(By.cssSelector("input[name='value[]']"));
-
-         formModelSelect.sendKeys("Album");
-         formInputNameValue.sendKeys("equal");
          formSave1.click();
      }
          //  @Test    div.rule-group input[name='value[]']
          void createSmartPlaylistMultibleRule ()
          {
+             formAddRule.click();
+
+             formOperatorSelect = driver.findElement(By.cssSelector("select[name='operator[]']"));
+             formInputNameValue = driver.findElement(By.cssSelector("input[name='value[]']"));
+
+             formModelSelect.sendKeys("Album");
+             formInputNameValue.sendKeys("equal");
              formPlaylistName.sendKeys("first smart playlist");
              //formModelSelect.sendKeys("title");
          }
+
+         void openArtistsPage()
+         {
+             WebElement artistsLink= driver.findElement(By.cssSelector("a.artists"));
+             wait.until((ExpectedConditions.elementToBeClickable(artistsLink))).click();
+
+         }
+    void searchArtists(String name)
+    {
+        WebElement artistSearch= driver.findElement(By.cssSelector("input[type='search']"));
+        wait.until((ExpectedConditions.elementToBeClickable(artistSearch))).sendKeys(name);
+
+
+    }
+
 
      }
