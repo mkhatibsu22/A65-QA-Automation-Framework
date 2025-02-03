@@ -4,16 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
 import java.time.Duration;
 
-public class SmartPlaylist   {
+public class BaseTest {
    // WebDriver driver;
 
     WebElement passwordField;
@@ -35,7 +31,7 @@ public class SmartPlaylist   {
 
 
 
-    public SmartPlaylist()  {
+    public BaseTest()  {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -101,6 +97,7 @@ public class SmartPlaylist   {
              wait.until((ExpectedConditions.elementToBeClickable(artistsLink))).click();
 
          }
+
     void searchArtists(String name)
     {
         WebElement artistSearch= driver.findElement(By.cssSelector("input[type='search']"));

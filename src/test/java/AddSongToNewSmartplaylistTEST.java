@@ -7,7 +7,7 @@ User should be able to add songs to the Smart playlist by editing existing rules
 User’s playlist should be updated correctly in DB
 User should be able to delete Smart Playlist
 * */
-    SmartPlaylist smartPlaylist=new SmartPlaylist();
+    BaseTest smartPlaylist=new BaseTest();
     @Test
     void User_should_be_able_to_create_a_Smart_playlist_in_app()
     {

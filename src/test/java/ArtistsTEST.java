@@ -2,7 +2,7 @@ import org.testng.annotations.Test;
 
 public class ArtistsTEST {
 
-    SmartPlaylist smartPlaylist=new SmartPlaylist();
+    BaseTest smartPlaylist=new BaseTest();
 
     @Test
     void User_should_be_able_to_see_artists_in_app()
