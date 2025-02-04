@@ -69,7 +69,7 @@ public class BaseTest {
          formAddRule = driver.findElement(By.cssSelector("button[class='btn-add-rule']"));
          formAddGroup = driver.findElement(By.cssSelector("button[class='btn-add-group']"));
          formSave1 = driver.findElement(By.cssSelector("div.smart-playlist-form button[type='submit']"));
-
+//select[name='operator[]'] > option:nth-of-type(1)
          formPlaylistName.sendKeys(name);
          formModelSelect.sendKeys(model);
          formInputNameValue.sendKeys(eqValue);

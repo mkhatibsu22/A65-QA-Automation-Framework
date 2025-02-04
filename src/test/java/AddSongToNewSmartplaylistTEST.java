@@ -1,6 +1,8 @@
 import org.testng.annotations.Test;
 
 public class AddSongToNewSmartplaylistTEST {
+    //https://track.testpro.io/browse/INTERNSHIP-101837
+
     /*
     * User should be able to create a Smart playlist in app
 User should be able to add songs to the Smart playlist by editing existing rules and group settings
@@ -9,9 +11,8 @@ User should be able to delete Smart Playlist
 * */
     BaseTest smartPlaylist=new BaseTest();
     @Test
-    void User_should_be_able_to_create_a_Smart_playlist_in_app()
-    {
-
+    void User_should_be_able_to_create_a_Smart_playlist_in_app() throws InterruptedException {
+        smartPlaylist.addOnerule("smart playlisy try","Title","","anything");
     }
 
     @Test
