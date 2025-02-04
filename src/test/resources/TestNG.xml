@@ -5,7 +5,10 @@
 
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="LoginTests"/>
+            <class name="SmartPlaylistTests"/>
+            <class name="ArtistsTEST"/>
+            <class name="AddSongToNewSmartplaylistTEST"/>
+
             <class name="BaseTest"/>
         </classes>
     </test>
