@@ -30,6 +30,6 @@ User should be able to delete Smart Playlist
     @Test
     void User_should_be_able_to_delete_Smart_Playlist()
     {
-
+        smartPlaylist.deleteSmartPlaylist(4);
     }
 }
